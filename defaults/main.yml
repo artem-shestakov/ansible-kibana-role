@@ -1,0 +1,12 @@
+---
+version: "7"
+
+server_host: "127.0.0.1"
+server_port: "5601"
+
+elasticsearch_hosts: [ "http://localhost:9200" ]
+
+elasticsearch_sniffInterval: false
+elasticsearch_sniffOnConnectionFault: false
+
+logging_dest: stdout

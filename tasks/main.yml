@@ -1,0 +1,36 @@
+---
+- name: Preparation before installing (Debian/Ubuntu)
+  import_tasks: setting_deb.yml
+  when: ansible_facts['os_family']|lower == 'debian'
+
+- name: Preparation before installing (CentOS/RHEL)
+  import_tasks: setting_rpm.yml
+  when: ansible_facts['os_family']|lower == 'redhat'
+
+- name: Install Kibana
+  package:
+    name: kibana
+    state: present
+
+- name: Create log directory
+  ansible.builtin.file:
+    path: "{{ logging_dest }}"
+    state: directory
+    owner: root
+    group: kibana
+    mode: '0660'
+  when: logging_dest != "stdout"
+
+- name: Copy Kibana config file
+  template:
+    src: kibana.yml.j2
+    dest: /etc/kibana/kibana.yml
+    owner: root
+    group: root
+    mode: '0664'
+
+- name: Enable and start service
+  service:
+    name: kibana
+    state: started
+    enabled: yes

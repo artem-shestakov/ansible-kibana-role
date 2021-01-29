@@ -1,0 +1,14 @@
+---
+- name: Download and install the public signing key
+  rpm_key:
+    fingerprint: 4609 5ACC 8548 582C 1A26 99A9 D27D 666C D88E 42B4
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Elastic repository
+  template:
+    src: kibana.repo.j2
+    dest: /etc/yum.repos.d/kibana.repo
+    owner: root
+    group: root
+    mode: '644'
