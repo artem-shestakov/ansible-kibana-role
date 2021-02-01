@@ -35,7 +35,7 @@
     state: started
     enabled: yes
 
-- name: Wait for Kibana startup
+- name: Waiting for Kibana startup
   wait_for:
     host: "{{ server_host }}"
     port: "{{ server_port }}"
