@@ -14,11 +14,11 @@
 
 - name: Create log directory
   ansible.builtin.file:
-    path: "{{ logging_dest }}"
+    path: "{{ '/'.join(logging_dest.split('/')[:-1]) }}"
     state: directory
     owner: root
     group: kibana
-    mode: '0660'
+    mode: '0775'
   when: logging_dest != "stdout"
 
 - name: Copy Kibana config file
@@ -26,7 +26,7 @@
     src: kibana.yml.j2
     dest: /etc/kibana/kibana.yml
     owner: root
-    group: root
+    group: kibana
     mode: '0664'
 
 - name: Enable and start service
@@ -34,3 +34,11 @@
     name: kibana
     state: started
     enabled: yes
+
+- name: Wait for Kibana startup
+  wait_for: 
+    host: "{{ server_host }}"
+    port: "{{ server_port }}"
+    delay: 5
+    connect_timeout: 2
+    timeout: 60
