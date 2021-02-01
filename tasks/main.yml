@@ -13,7 +13,7 @@
     state: present
 
 - name: Create log directory
-  ansible.builtin.file:
+  file:
     path: "{{ '/'.join(logging_dest.split('/')[:-1]) }}"
     state: directory
     owner: root
@@ -36,7 +36,7 @@
     enabled: yes
 
 - name: Wait for Kibana startup
-  wait_for: 
+  wait_for:
     host: "{{ server_host }}"
     port: "{{ server_port }}"
     delay: 5
