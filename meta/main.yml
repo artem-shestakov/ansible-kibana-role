@@ -9,13 +9,8 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
-<<<<<<< HEAD
     - bionic
   - name: EL
-=======
-    - 18.04
-  - name: CentOS
->>>>>>> 332e10008f15cfb7946a891dc8b25234e1d1fc24
     versions:
     - 8
 
@@ -25,9 +20,4 @@ galaxy_info:
   - efk
   - logging
 
-<<<<<<< HEAD
 dependencies: []
-=======
-dependencies: []
-
->>>>>>> 332e10008f15cfb7946a891dc8b25234e1d1fc24
